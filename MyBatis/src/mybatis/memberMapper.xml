@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 공통작업구간 -->
+<mapper namespace="mybatis.memberMapper"> 
+	
+	<!-- 추가 --> <!-- id:접근자  parameterType: 패키지명 포함 dto 
+					#:데이터 들어오면 자동으로 ''를 붙여준다.
+					$:수치값은 $를 붙여준다.-->
+	<insert id="add" parameterType="dto.MemberVo">
+		INSERT INTO MEMBERVO(ID, PWD, EMAIL, PHONE)
+		VALUES(#{id}, #{pwd}, #{email}, #{phone})	
+	</insert>	
+	
+	<!-- 삭제 -->
+	<!-- id만 알면되므로 String으로 -->
+	<delete id="remove" parameterType="java.lang.String">
+		DELETE FROM MEMBERVO
+		WHERE ID=#{id}
+	</delete>
+	
+	
+	<!-- 검색 (하나) id로 찾겠다(String:java.lang.String) return값이 필요-->
+	<select id="find" parameterType="java.lang.String"
+			resultType="dto.MemberVo">
+		SELECT ID, PWD, EMAIL, PHONE
+		FROM MEMBERVO
+		WHERE ID=#{id}	
+	</select>
+	
+	<!-- 검색 (전체) 들어가는 데이터가 필요없다-->
+	<select id="getlist" resultType="dto.MemberVo">
+		SELECT ID, PWD, EMAIL, PHONE
+		FROM MEMBERVO	
+	</select>
+	
+	
+
+</mapper>
